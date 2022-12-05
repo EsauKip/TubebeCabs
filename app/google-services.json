@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "126920503596",
+    "project_id": "tubebecabs",
+    "storage_bucket": "tubebecabs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126920503596:android:bef1b39c8abc535ceb3c89",
+        "android_client_info": {
+          "package_name": "com.example.tubebecabs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "126920503596-hjpo4fo0vhoogpss98bb8l925djuau61.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2EgSbQPXrtHuGhI63rXYvcOgMPt30ra0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "126920503596-hjpo4fo0vhoogpss98bb8l925djuau61.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
