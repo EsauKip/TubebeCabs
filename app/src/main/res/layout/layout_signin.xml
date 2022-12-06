@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/splash_screen">
+    android:background="@drawable/rider_splash_screen">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,10 +19,19 @@
             android:layout_height="wrap_content"
             android:id="@+id/btn_phone_sign_in"
             android:layout_marginBottom="10dp"
-            android:background="@color/white"
+            android:background="@color/colorAccent"
             android:textColor="@color/black"
             android:drawableStart="@drawable/ic_baseline_local_phone_24"
             android:text="Sign in with Phone"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_google_sign_in"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:drawableStart="@drawable/fui_ic_googleg_color_24dp"
+            android:text="Sign in with Google"/>
 
     </LinearLayout>
 
