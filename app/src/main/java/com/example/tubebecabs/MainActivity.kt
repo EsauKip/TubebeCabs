@@ -11,6 +11,7 @@ import com.firebase.ui.auth.AuthUI.IdpConfig.GoogleBuilder
 import com.firebase.ui.auth.AuthUI.IdpConfig.PhoneBuilder
 import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import java.util.Arrays
@@ -24,6 +25,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var providers: List<AuthUI.IdpConfig>
     private lateinit var firebaseAuth:FirebaseAuth
     private lateinit var listener:FirebaseAuth.AuthStateListener
+
+    private lateinit var database:FirebaseDatabase
+    private lateinit var driverInfoRef:DatabaseReference
+
 
 
     override fun onStart(){
@@ -47,6 +52,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_splash_screen)
+
 
 
         init()
@@ -55,6 +62,10 @@ class MainActivity : AppCompatActivity() {
 
     }
     private fun init(){
+
+        database = FirebaseDatabase.getInstance()
+        driverInfoRef =database.getReference(Common.DRIVER_INFO_REFERENCE)
+
         providers = Arrays.asList(
             AuthUI.IdpConfig.PhoneBuilder().build(),
             AuthUI.IdpConfig.GoogleBuilder().build()
@@ -64,15 +75,46 @@ class MainActivity : AppCompatActivity() {
         listener = FirebaseAuth.AuthStateListener {  myFirebaseAuth ->
             val user = myFirebaseAuth.currentUser
             if (user != null)
-                Toast.makeText(this@MainActivity,"Welcome:"+user.uid,Toast.LENGTH_SHORT).show()
+            {
+                checkUserFromFirebase()
+            }
             else
                 showLoginLayout()
         }
 
     }
 
-    private fun showLoginLayout() {
-      val authMethodPickerLayout = AuthMethodPickerLayout.Builder(R.layout.layout_signin)
+    private fun checkUserFromFirebase() {
+        driverInfoRef
+            .child(FirebaseAuth.getInstance().currentUser!!.uid)
+            .addListenerForSingleValueEvent(object :ValueEventListener{
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    if (dataSnapshot.exists())
+                    {
+
+                        Toast.makeText(this@MainActivity,"user already registered!",Toast.LENGTH_SHORT).show()
+
+                    }
+                    else{
+                        showRegisterLayout()
+
+                    }
+
+                }
+
+                override fun onCancelled(p0: DatabaseError) {
+                    Toast.makeText(this@MainActivity,p0.message,Toast.LENGTH_SHORT).show()
+                }
+
+            })
+    }
+
+    private fun showRegisterLayout() {
+
+        
+    }
+
+    private fun showLoginLayout() { val authMethodPickerLayout = AuthMethodPickerLayout.Builder(R.layout.layout_signin)
           .setPhoneButtonId(R.id.btn_phone_sign_in)
           .setGoogleButtonId(R.id.btn_google_sign_in)
           .build();

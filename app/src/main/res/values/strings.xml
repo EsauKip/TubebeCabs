@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TubebeCabs</string>
+    <string name="continue_text">Continue</string>
+    <string name="register_text">Register</string>
 </resources>
